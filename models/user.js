@@ -21,14 +21,20 @@ const userSchema = new Schema(
         validate: [validateEmail, 'Please provide an email'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
-    thoughts: {
-        /* no clue, ask andres */
-    },
-    friends: {
-        /* again, ask andres */
-    }
+    thoughts:  [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Thought'
+        }
+    ],
+    friends: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
 });
 
-const User = model('user', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;

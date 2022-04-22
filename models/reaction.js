@@ -1,11 +1,11 @@
-const { ObjectId } = require('bson');
-const { Schema, model, types } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
+const dateFormat = require("../utils/dateFormat")
 
 const reactionSchema = new Schema(
 {
     reactionId: {
-        type: ObjectId,
-        default: ObjectId
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId()
     },
     reactionBody: {
         type: String,
@@ -23,6 +23,4 @@ const reactionSchema = new Schema(
     }
 });
 
-const Reaction = model('Reaction', reactionSchema);
-
-module.exports = Reaction;
+module.exports = reactionSchema;

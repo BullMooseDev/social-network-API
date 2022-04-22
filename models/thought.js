@@ -1,4 +1,6 @@
 const { Schema, model, types } = require('mongoose');
+const reactionSchema = require('./Reaction')
+const dateFormat = require("../utils/dateFormat")
 
 const thoughtSchema = new Schema(
 {
@@ -17,11 +19,9 @@ const thoughtSchema = new Schema(
         type: String,
         required: true
     },
-    reactions: {
-        /* array of nested couments created with the reactionSchema */
-    }
+    reactions: [reactionSchema]
 });
 
-const Thought = model('thought', thoughtSchema);
+const Thought = model('Thought', thoughtSchema);
 
 module.exports = Thought;
