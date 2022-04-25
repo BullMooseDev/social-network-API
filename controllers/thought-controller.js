@@ -14,6 +14,21 @@ const thoughtController = {
         .catch(err => {console.log(err); res.sendStatus(400)})
     },
 
+    //get a single thought by id
+    getThoughtById({params}, res) {
+        Thought.findOne({ _id: params.id})
+        .populate({
+            path: 'users',
+            select: '-__v'
+        })
+        select("-__v")
+        .then(dbThoughtData => res.json(dbThoughtData))
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(400);
+        })
+    },
+
     // create a thought
     addThought({ params, body }, res) {
         console.log(params);
@@ -54,34 +69,17 @@ const thoughtController = {
     },
 
     //remove a thought
+    deleteThought({ params }, res) {
+        Thought.findOneAndDelete({ _id: params.id })
+          .then(dbThoughtData => res.json(dbThoughtData))
+          .catch(err => res.json(err));
+      }
 };
 
 module.exports = thoughtController;
 
 
 /* 
-
-- get all users
-
-- get a single user by its id and populated thought and friend data
-
-- post new user
-
-- put to update by id
-
-/api/users/:userId/friends/:friendId
-
-- get all thoughts
-
-- get a single thought
-
-- post create a new thought (push the created thoughts id to the associated user)
-
-- PUT to update a thought by its _id
-
-DELETE to remove a thought by its _id
-
-/api/thoughts/:thoughtId/reactions
 
 POST to create a reaction stored in a single thought's reactions array field
 
