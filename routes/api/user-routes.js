@@ -16,7 +16,7 @@ router
 
 // api for thoughts
 router
-.route('/:userId')
+.route('/:_Id')
 .get(getUserById)
 .put(updateUser)
 .delete(deleteUser);

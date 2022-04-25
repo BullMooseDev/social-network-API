@@ -4,12 +4,6 @@ const userController = {
     // get all Users
     getAllUsers(req, res) {
       User.find({})
-        .populate({
-          path: 'comments',
-          select: '-__v'
-        })
-        .select('-__v')
-        .sort({ _id: -1 })
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
           console.log(err);
@@ -19,12 +13,7 @@ const userController = {
   
     // get one User by id
     getUserById({ params }, res) {
-      User.findOne({ _id: params.id })
-        .populate({
-          path: 'thoughts',
-          select: '-__v'
-        })
-        .select('-__v')
+      User.findOne({ _id: params })
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
           console.log(err);
@@ -61,10 +50,3 @@ const userController = {
   };
 
   module.exports = userController;
-
-
-/* - get all users
-
-- get a single user by its id and populated thought and friend data
-
-/api/users/:userId/friends/:friendId */

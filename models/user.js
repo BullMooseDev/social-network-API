@@ -32,7 +32,10 @@ const userSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User'
         }
-    ]
+    ],
+    _Id:{
+        type: Schema.Types.ObjectId
+    }
 });
 
 const User = model('User', userSchema);
